@@ -1,0 +1,649 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   Einschlafkalender – style.css
+   Abreißkalender-Design, dunkel & warm, mobile-first
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg:            #0d0a06;
+  --page-bg:       #f4e8c8;
+  --page-bg-old:   #e2d0a2;
+  --binding:       #1a0d04;
+  --binding-border:#3a2008;
+  --ring:          #c8a045;
+  --month-bg-top:  #7a1e1e;
+  --month-bg-bot:  #5a1212;
+  --month-text:    #f8edd8;
+  --text:          #261508;
+  --text-mid:      #5a3818;
+  --text-light:    #8a6035;
+  --red:           #be2020;
+  --divider:       #c8a458;
+  --play-bg:       #261508;
+  --play-fg:       #f4e8c8;
+  --shadow:        rgba(0,0,0,0.55);
+}
+
+/* ── Grundlayout ─────────────────────────────────────────────────────────── */
+html { font-size: 16px; }
+
+body {
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(ellipse 70% 60% at 25% 55%, rgba(55,25,5,0.35) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 40% at 80% 15%, rgba(35,15,3,0.25) 0%, transparent 60%);
+  min-height: 100dvh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 1.2rem 0 4rem;
+  font-family: Georgia, 'Times New Roman', serif;
+  color: var(--text);
+}
+
+main {
+  width: 100%;
+  max-width: 440px;
+  padding: 0 0.75rem;
+}
+
+/* ── Kalender-Wrapper ────────────────────────────────────────────────────── */
+.calendar-wrapper {
+  position: relative;
+}
+
+/* ── Bindung (Metallschiene oben) ────────────────────────────────────────── */
+.cal-binding {
+  background: linear-gradient(180deg, #2e1a08 0%, #180d03 100%);
+  border: 2px solid var(--binding-border);
+  border-bottom: 3px solid #0a0602;
+  border-radius: 6px 6px 0 0;
+  padding: 7px 14px 9px;
+  box-shadow:
+    0 -3px 10px rgba(0,0,0,0.6),
+    inset 0 1px 0 rgba(255,200,80,0.08);
+}
+
+.cal-rings {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2px;
+}
+
+.cal-ring {
+  display: block;
+  width: 20px;
+  height: 26px;
+  border-radius: 50%;
+  border: 3px solid var(--ring);
+  background: transparent;
+  box-shadow:
+    0 0 0 1.5px rgba(0,0,0,0.6),
+    inset 0 1px 3px rgba(255,220,100,0.15),
+    0 2px 4px rgba(0,0,0,0.4);
+  flex-shrink: 0;
+}
+
+/* ── Papierrest (altes Blatt, abgerissen) ────────────────────────────────── */
+.cal-remnant {
+  display: block;
+  width: 100%;
+  background: var(--page-bg-old);
+  border: 2px solid var(--binding-border);
+  border-top: none;
+  border-bottom: none;
+  cursor: pointer;
+  padding: 5px 18px 18px;
+  text-align: left;
+  position: relative;
+  /* leicht gelblicher als das aktuelle Blatt */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+}
+
+.cal-remnant:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: -2px;
+}
+
+/* Abgerissene untere Kante des Papierrests */
+.cal-remnant::after {
+  content: '';
+  position: absolute;
+  bottom: -14px;
+  left: -2px;
+  right: -2px;
+  height: 18px;
+  background: var(--page-bg-old);
+  z-index: 3;
+  clip-path: polygon(
+    0% 0%,
+    1.5% 95%, 3% 15%, 4.5% 80%, 6% 8%,
+    7.5% 88%, 9% 20%, 10.5% 75%, 12% 5%,
+    13.5% 90%, 15% 22%, 16.5% 82%, 18% 10%,
+    19.5% 85%, 21% 18%, 22.5% 78%, 24% 6%,
+    25.5% 92%, 27% 25%, 28.5% 88%, 30% 12%,
+    31.5% 80%, 33% 5%,  34.5% 88%, 36% 20%,
+    37.5% 82%, 39% 8%,  40.5% 86%, 42% 22%,
+    43.5% 90%, 45% 10%, 46.5% 78%, 48% 15%,
+    49.5% 85%, 51% 5%,  52.5% 80%, 54% 28%,
+    55.5% 88%, 57% 12%, 58.5% 75%, 60% 8%,
+    61.5% 90%, 63% 20%, 64.5% 82%, 66% 5%,
+    67.5% 88%, 69% 22%, 70.5% 78%, 72% 10%,
+    73.5% 85%, 75% 18%, 76.5% 80%, 78% 6%,
+    79.5% 92%, 81% 25%, 82.5% 85%, 84% 12%,
+    85.5% 78%, 87% 5%,  88.5% 88%, 90% 20%,
+    91.5% 82%, 93% 8%,  94.5% 86%, 96% 18%,
+    97.5% 75%, 100% 30%,
+    100% 0%
+  );
+}
+
+.cal-remnant-month {
+  display: block;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.2em;
+  color: var(--text-light);
+  opacity: 0.65;
+  line-height: 1;
+  margin-bottom: 2px;
+}
+
+.cal-remnant-day {
+  display: block;
+  font-size: 2rem;
+  color: var(--text-light);
+  opacity: 0.5;
+  line-height: 1;
+}
+
+.cal-remnant-hint {
+  position: absolute;
+  right: 12px;
+  bottom: 22px;
+  font-family: Arial, sans-serif;
+  font-size: 0.6rem;
+  color: var(--text-light);
+  opacity: 0.45;
+  letter-spacing: 0.05em;
+}
+
+/* ── Kalenderblatt (aktueller Tag) ───────────────────────────────────────── */
+.cal-page {
+  background-color: var(--page-bg);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  border: 2px solid var(--binding-border);
+  border-top: none;
+  border-radius: 0 0 4px 4px;
+  box-shadow:
+    0 10px 40px var(--shadow),
+    0 3px 6px rgba(0,0,0,0.3),
+    inset 0 1px 0 rgba(255,245,210,0.4);
+  position: relative;
+  z-index: 4;
+  margin-top: 6px;
+  overflow: hidden;
+}
+
+/* Abreiß-Animation */
+@keyframes tearIn {
+  0%   { transform: translateY(-10px) rotate(-0.4deg); opacity: 0.85; }
+  45%  { transform: translateY(3px) rotate(0.2deg); }
+  70%  { transform: translateY(-1px) rotate(-0.05deg); }
+  100% { transform: translateY(0) rotate(0deg); opacity: 1; }
+}
+
+.cal-page.tearing {
+  animation: tearIn 0.65s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cal-page.tearing { animation: none; }
+}
+
+/* ── Monat-Header ────────────────────────────────────────────────────────── */
+.cal-page-month {
+  background: linear-gradient(180deg, var(--month-bg-top) 0%, var(--month-bg-bot) 100%);
+  color: var(--month-text);
+  text-align: center;
+  padding: 10px 16px 8px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.35);
+  border-bottom: 1px solid rgba(0,0,0,0.2);
+}
+
+/* ── Tageszahl ───────────────────────────────────────────────────────────── */
+.cal-page-day {
+  display: block;
+  text-align: center;
+  font-size: clamp(5.5rem, 24vw, 8rem);
+  font-family: Georgia, 'Times New Roman', serif;
+  font-weight: normal;
+  color: var(--text);
+  line-height: 0.95;
+  padding: 10px 16px 2px;
+  letter-spacing: -3px;
+  transition: color 0.1s;
+}
+
+.cal-page-day.is-red {
+  color: var(--red);
+}
+
+/* ── Wochentag ───────────────────────────────────────────────────────────── */
+.cal-page-weekday {
+  display: block;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  color: var(--text-mid);
+  padding: 3px 16px 2px;
+}
+
+/* ── Feiertag / Besonderer Tag ───────────────────────────────────────────── */
+.cal-page-holiday {
+  display: block;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.68rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: var(--red);
+  min-height: 1.4em;
+  padding: 0 16px 4px;
+}
+
+/* ── Meta-Zeile: KW · Mond · Sonnenuntergang ────────────────────────────── */
+.cal-page-meta {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.4rem;
+  padding: 3px 16px 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.7rem;
+  color: var(--text-light);
+}
+
+/* ── Trennlinie ──────────────────────────────────────────────────────────── */
+.cal-divider {
+  border: none;
+  border-top: 1px solid var(--divider);
+  margin: 0 16px;
+  opacity: 0.45;
+}
+
+/* ── Geschichte des Tages ────────────────────────────────────────────────── */
+.cal-story {
+  padding: 16px 20px 10px;
+  text-align: center;
+}
+
+.cal-story-title {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 1.25rem;
+  font-weight: normal;
+  color: var(--text);
+  line-height: 1.35;
+  margin-bottom: 5px;
+}
+
+.cal-story-meta {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.72rem;
+  color: var(--text-light);
+  letter-spacing: 0.06em;
+  margin-bottom: 14px;
+  min-height: 1.1em;
+}
+
+/* ── Play-Button ─────────────────────────────────────────────────────────── */
+.cal-play-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 10px;
+  border-radius: 50%;
+  border: 2px solid var(--play-bg);
+  background: var(--play-bg);
+  color: var(--play-fg);
+  font-size: 1.55rem;
+  cursor: pointer;
+  box-shadow:
+    0 4px 14px rgba(0,0,0,0.25),
+    0 1px 3px rgba(0,0,0,0.2);
+  transition: background 0.18s, transform 0.1s;
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 4px 14px rgba(0,0,0,0.25), 0 0 0 0 rgba(38,21,8,0.18); }
+  50%       { box-shadow: 0 4px 14px rgba(0,0,0,0.25), 0 0 0 9px rgba(38,21,8,0); }
+}
+
+.cal-play-btn:not([data-playing="true"]) {
+  animation: pulse 2.8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cal-play-btn { animation: none !important; }
+}
+
+.cal-play-btn:hover {
+  background: #4a2c10;
+  transform: scale(1.06);
+}
+
+.cal-play-btn:focus-visible {
+  outline: 3px solid var(--ring);
+  outline-offset: 3px;
+}
+
+/* ── Fortschritt & Skip-Buttons ──────────────────────────────────────────── */
+.cal-progress-wrap {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.cal-time {
+  font-family: 'Courier New', monospace;
+  font-size: 0.75rem;
+  color: var(--text-light);
+  margin-bottom: 7px;
+}
+
+.cal-skip-btns {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.cal-skip {
+  background: transparent;
+  border: 1px solid rgba(138,96,53,0.4);
+  border-radius: 4px;
+  color: var(--text-light);
+  font-family: Arial, sans-serif;
+  font-size: 0.68rem;
+  padding: 4px 11px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.cal-skip:hover { background: rgba(38,21,8,0.08); }
+.cal-skip:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+
+/* ── Sleep-Timer ─────────────────────────────────────────────────────────── */
+.cal-timer {
+  padding: 8px 20px 6px;
+  text-align: center;
+}
+
+.cal-timer-label {
+  font-family: Arial, sans-serif;
+  font-size: 0.68rem;
+  color: var(--text-light);
+  letter-spacing: 0.06em;
+  margin-bottom: 8px;
+}
+
+.cal-timer-btns {
+  display: flex;
+  justify-content: center;
+  gap: 7px;
+  flex-wrap: wrap;
+}
+
+.cal-timer-btn {
+  background: transparent;
+  border: 1px solid rgba(138,96,53,0.5);
+  border-radius: 4px;
+  color: var(--text-mid);
+  font-family: Arial, sans-serif;
+  font-size: 0.7rem;
+  padding: 5px 11px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.cal-timer-btn:hover,
+.cal-timer-btn.active {
+  background: var(--play-bg);
+  color: var(--play-fg);
+  border-color: var(--play-bg);
+}
+
+.cal-timer-btn:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+
+.cal-timer-status {
+  font-family: Arial, sans-serif;
+  font-size: 0.68rem;
+  color: var(--text-light);
+  margin-top: 7px;
+  min-height: 1.1em;
+  font-style: italic;
+}
+
+/* ── Gute-Nacht-Spruch ───────────────────────────────────────────────────── */
+.cal-quote {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-style: italic;
+  font-size: 0.83rem;
+  color: var(--text-mid);
+  line-height: 1.55;
+  text-align: center;
+  padding: 12px 24px 10px;
+  quotes: '„' '"';
+}
+
+.cal-quote:not(:empty)::before { content: open-quote; }
+.cal-quote:not(:empty)::after  { content: close-quote; }
+
+/* ── Link & Teilen ───────────────────────────────────────────────────────── */
+.cal-actions {
+  padding: 4px 20px 8px;
+  text-align: center;
+}
+
+.cal-link {
+  display: inline-block;
+  color: #6b2a00;
+  font-family: Arial, sans-serif;
+  font-size: 0.75rem;
+  text-decoration: none;
+  line-height: 1.45;
+  margin-bottom: 10px;
+}
+
+.cal-link:hover { text-decoration: underline; }
+.cal-link:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+
+.cal-share-btns { display: flex; justify-content: center; gap: 8px; }
+
+.cal-share-btn {
+  background: transparent;
+  border: 1px solid rgba(138,96,53,0.4);
+  border-radius: 4px;
+  color: var(--text-light);
+  font-family: Arial, sans-serif;
+  font-size: 0.72rem;
+  padding: 6px 18px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.cal-share-btn:hover { background: rgba(38,21,8,0.08); }
+.cal-share-btn:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+
+/* ── Morgen-Zeile ────────────────────────────────────────────────────────── */
+.cal-tomorrow {
+  text-align: center;
+  font-family: Georgia, serif;
+  font-style: italic;
+  font-size: 0.75rem;
+  color: var(--text-light);
+  padding: 4px 20px 12px;
+  opacity: 0.65;
+}
+
+/* ── Seiten-Footer ───────────────────────────────────────────────────────── */
+.cal-footer {
+  border-top: 1px solid rgba(200,164,88,0.35);
+  padding: 10px 16px 12px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 4px 8px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.65rem;
+  color: var(--text-light);
+  opacity: 0.75;
+}
+
+.cal-footer a { color: #6b2a00; text-decoration: none; }
+.cal-footer a:hover { text-decoration: underline; }
+
+/* ── Gestern-Overlay ─────────────────────────────────────────────────────── */
+.cal-yesterday-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.82);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.cal-yesterday-overlay[hidden] { display: none; }
+
+.cal-yesterday-page {
+  background-color: var(--page-bg-old);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+  max-width: 380px;
+  width: 100%;
+  border-radius: 4px;
+  padding: 24px 20px 20px;
+  position: relative;
+  text-align: center;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.55);
+}
+
+.cal-overlay-close {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  background: none;
+  border: none;
+  font-size: 1.6rem;
+  color: var(--text-light);
+  cursor: pointer;
+  line-height: 1;
+  padding: 4px;
+}
+
+.cal-overlay-close:focus-visible { outline: 2px solid var(--ring); border-radius: 2px; }
+
+/* ── Weiterhören-Dialog ──────────────────────────────────────────────────── */
+.cal-resume {
+  position: fixed;
+  bottom: 1.2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1e1005;
+  color: #f4e8c8;
+  padding: 14px 20px 16px;
+  border-radius: 10px;
+  text-align: center;
+  z-index: 100;
+  width: calc(100% - 2.4rem);
+  max-width: 380px;
+  box-shadow: 0 6px 28px rgba(0,0,0,0.55);
+  font-family: Arial, sans-serif;
+  font-size: 0.83rem;
+  line-height: 1.4;
+  border: 1px solid rgba(200,160,70,0.25);
+}
+
+.cal-resume[hidden] { display: none; }
+
+.cal-resume p { margin-bottom: 12px; }
+
+.cal-resume-btns { display: flex; justify-content: center; gap: 10px; }
+
+.cal-resume-btns button {
+  padding: 8px 18px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: Arial, sans-serif;
+  font-size: 0.8rem;
+  border: 1px solid var(--ring);
+  background: transparent;
+  color: var(--ring);
+  transition: background 0.15s;
+}
+
+.cal-resume-btns button:hover { background: rgba(200,160,69,0.15); }
+.cal-resume-btns button:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+
+/* ── Desktop ─────────────────────────────────────────────────────────────── */
+@media (min-width: 500px) {
+  main { padding: 0 1rem; }
+  .cal-page-day { letter-spacing: -4px; }
+}
+
+@media (min-width: 700px) {
+  body { padding-top: 2.5rem; }
+}
+
+/* ── Text-Seiten (Impressum, Datenschutz) ────────────────────────────────── */
+.text-page {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem 1.2rem 4rem;
+  color: #f0dfc0;
+  font-family: Georgia, serif;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+.text-page h1 {
+  font-size: 1.5rem;
+  font-weight: normal;
+  margin-bottom: 1.5rem;
+  color: #f4e8c8;
+}
+.text-page h2 {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-top: 1.8rem;
+  margin-bottom: 0.4rem;
+  font-family: Arial, sans-serif;
+  letter-spacing: 0.05em;
+  color: #c8a458;
+}
+.text-page p   { margin-bottom: 0.8rem; }
+.text-page ul  { padding-left: 1.4rem; margin-bottom: 0.8rem; }
+.text-page li  { margin-bottom: 0.3rem; }
+.text-page a   { color: #c8a458; }
+.text-page .back {
+  display: inline-block;
+  margin-bottom: 2rem;
+  font-family: Arial, sans-serif;
+  font-size: 0.78rem;
+  color: #8a6035;
+  text-decoration: none;
+}
+.text-page .back:hover { text-decoration: underline; }

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Einschlafkalender – jeden Abend eine Geschichte zum Einschlafen</title>
+  <meta name="description"
+        content="Jeden Abend eine neue Hörgeschichte zum Einschlafen. Kostenlos, werbefrei, ohne Anmeldung – einfach Play drücken und zur Ruhe kommen.">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website">
+  <meta property="og:url"         content="https://einschlafkalender.de/">
+  <meta property="og:title"       content="Einschlafkalender – jeden Abend eine Geschichte zum Einschlafen">
+  <meta property="og:description" content="Jeden Abend eine neue Hörgeschichte zum Einschlafen. Kostenlos, werbefrei, ohne Anmeldung.">
+  <meta property="og:image"       content="https://einschlafkalender.de/assets/og-image.jpg">
+
+  <link rel="canonical" href="https://einschlafkalender.de/">
+  <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+
+  <!-- JSON-LD wird von app.js befüllt -->
+  <script type="application/ld+json" id="jsonld"></script>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <div class="calendar-wrapper">
+
+      <!-- Bindung / Metallschiene -->
+      <div class="cal-binding" aria-hidden="true">
+        <div class="cal-rings">
+          <span class="cal-ring"></span>
+          <span class="cal-ring"></span>
+          <span class="cal-ring"></span>
+          <span class="cal-ring"></span>
+          <span class="cal-ring"></span>
+          <span class="cal-ring"></span>
+          <span class="cal-ring"></span>
+          <span class="cal-ring"></span>
+        </div>
+      </div>
+
+      <!-- Papierrest: gestern, abgerissen – Klick zeigt Gestern-Overlay -->
+      <button class="cal-remnant"
+              id="cal-remnant"
+              aria-label="Gestern verpasst? Blatt von gestern anzeigen">
+        <span class="cal-remnant-month" id="remnant-month"></span>
+        <span class="cal-remnant-day"   id="remnant-day"></span>
+        <span class="cal-remnant-hint"  aria-hidden="true">Gestern verpasst?</span>
+      </button>
+
+      <!-- Kalenderblatt: heute -->
+      <div class="cal-page" id="cal-page">
+
+        <div class="cal-page-month"   id="page-month"   aria-hidden="true">OKT</div>
+        <div class="cal-page-day"     id="page-day"     role="heading" aria-level="1">25</div>
+        <div class="cal-page-weekday" id="page-weekday" aria-hidden="true">SAMSTAG</div>
+        <div class="cal-page-holiday" id="page-holiday" aria-live="polite"></div>
+
+        <div class="cal-page-meta" aria-label="Kalenderinformationen">
+          <span id="page-kw"     title="Kalenderwoche"></span>
+          <span id="page-moon"   title="Mondphase"></span>
+          <span id="page-sunset" title="Sonnenuntergang Hamburg"></span>
+        </div>
+
+        <hr class="cal-divider">
+
+        <!-- Geschichte des Tages -->
+        <section class="cal-story" aria-label="Geschichte des Tages">
+
+          <h2 class="cal-story-title" id="story-title">Wird geladen …</h2>
+          <p  class="cal-story-meta"  id="story-meta"></p>
+
+          <audio id="audio" preload="none"></audio>
+
+          <button class="cal-play-btn" id="play-btn" aria-label="Abspielen">
+            <span id="play-icon" aria-hidden="true">&#9654;</span>
+          </button>
+
+          <!-- Fortschritt + Skip (erst nach Play sichtbar) -->
+          <div class="cal-progress-wrap" id="progress-wrap" hidden>
+            <div class="cal-time" id="time-display" aria-live="off">0:00 / 0:00</div>
+            <div class="cal-skip-btns">
+              <button class="cal-skip" id="skip-back" aria-label="15 Sekunden zurück">−15s</button>
+              <button class="cal-skip" id="skip-fwd"  aria-label="15 Sekunden vor">+15s</button>
+            </div>
+          </div>
+
+          <!-- Sleep-Timer (erst nach Play sichtbar) -->
+          <div class="cal-timer" id="timer-section" hidden>
+            <p class="cal-timer-label">Ausschalten nach:</p>
+            <div class="cal-timer-btns">
+              <button class="cal-timer-btn" data-min="15"
+                      onclick="setTimer(15)">15 Min</button>
+              <button class="cal-timer-btn" data-min="30"
+                      onclick="setTimer(30)">30 Min</button>
+              <button class="cal-timer-btn" data-min="45"
+                      onclick="setTimer(45)">45 Min</button>
+              <button class="cal-timer-btn" id="timer-end-btn"
+                      onclick="setTimer(0)">Ende</button>
+            </div>
+            <p class="cal-timer-status" id="timer-status" aria-live="polite"></p>
+          </div>
+
+        </section>
+
+        <hr class="cal-divider">
+
+        <!-- Gute-Nacht-Spruch -->
+        <blockquote class="cal-quote" id="cal-quote"></blockquote>
+
+        <hr class="cal-divider">
+
+        <!-- Link + Teilen -->
+        <div class="cal-actions">
+          <a href="#" id="story-link" class="cal-link"
+             target="_blank" rel="noopener noreferrer">
+            Text lesen &amp; alle Folgen auf stadtvampir.de
+          </a>
+          <div class="cal-share-btns">
+            <button class="cal-share-btn" id="share-btn">Teilen</button>
+          </div>
+        </div>
+
+        <p class="cal-tomorrow">Morgen wartet eine neue Geschichte.</p>
+
+        <footer class="cal-footer">
+          <span>Geschichten von
+            <a href="https://www.stadtvampir.de" target="_blank" rel="noopener">K54 Stadtvampir</a>
+          </span>
+          <span aria-hidden="true">&middot;</span>
+          <a href="impressum.html">Impressum</a>
+          <span aria-hidden="true">&middot;</span>
+          <a href="datenschutz.html">Datenschutz</a>
+        </footer>
+
+      </div><!-- /.cal-page -->
+    </div><!-- /.calendar-wrapper -->
+
+
+    <!-- Gestern-Overlay -->
+    <div class="cal-yesterday-overlay"
+         id="yesterday-overlay"
+         hidden
+         role="dialog"
+         aria-modal="true"
+         aria-labelledby="yesterday-title">
+      <div class="cal-yesterday-page">
+        <button class="cal-overlay-close"
+                id="overlay-close"
+                aria-label="Schließen">&times;</button>
+
+        <div class="cal-page-month"   id="yd-month"></div>
+        <div class="cal-page-day"     id="yd-day"></div>
+        <div class="cal-page-weekday" id="yd-weekday"></div>
+        <div class="cal-page-holiday" id="yd-holiday"></div>
+
+        <h2 class="cal-story-title" id="yesterday-title"></h2>
+        <p  class="cal-story-meta"  id="yd-meta"></p>
+
+        <audio id="yd-audio" preload="none"></audio>
+
+        <button class="cal-play-btn cal-play-btn--small"
+                id="yd-play-btn"
+                aria-label="Abspielen">&#9654;</button>
+
+        <a href="#" id="yd-link" class="cal-link"
+           target="_blank" rel="noopener noreferrer"
+           style="display:block;margin-top:14px">
+          Text lesen auf stadtvampir.de
+        </a>
+      </div>
+    </div>
+
+
+    <!-- Weiterhören-Dialog -->
+    <div class="cal-resume"
+         id="resume-dialog"
+         hidden
+         role="alertdialog"
+         aria-labelledby="resume-text">
+      <p id="resume-text"></p>
+      <div class="cal-resume-btns">
+        <button id="resume-continue">Weiterhören</button>
+        <button id="resume-restart">Von vorn</button>
+      </div>
+    </div>
+
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

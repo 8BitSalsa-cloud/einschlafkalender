@@ -1,0 +1,128 @@
+[
+  {
+    "id": "001",
+    "title": "Die Zahl 426",
+    "ort": "",
+    "dauer": "ca. XX Min.",
+    "mp3Url": "https://www.stadtvampir.de/assets/audio/staffel-1/001-die-zahl-426.mp3",
+    "coverUrl": "https://www.stadtvampir.de/assets/cover/staffel-1/001-die-zahl-426.webp",
+    "pageUrl": "https://www.stadtvampir.de/texte/staffel1/001-die-zahl-426.html"
+  },
+  {
+    "id": "007",
+    "title": "Im Schatten der Kathedrale",
+    "ort": "",
+    "dauer": "ca. XX Min.",
+    "mp3Url": "https://www.stadtvampir.de/assets/audio/staffel-1/007-im-schatten-der-kathedrale.mp3",
+    "coverUrl": "https://www.stadtvampir.de/assets/cover/staffel-1/007-im-schatten-der-kathedrale.webp",
+    "pageUrl": "https://www.stadtvampir.de/texte/staffel1/007-im-schatten-der-kathedrale.html"
+  },
+  {
+    "id": "008",
+    "title": "Das Haus an der Ecke",
+    "ort": "",
+    "dauer": "ca. XX Min.",
+    "mp3Url": "https://www.stadtvampir.de/assets/audio/staffel-1/008-das-haus-an-der-ecke.mp3",
+    "coverUrl": "https://www.stadtvampir.de/assets/cover/staffel-1/008-das-haus-an-der-ecke.webp",
+    "pageUrl": "https://www.stadtvampir.de/texte/staffel1/008-das-haus-an-der-ecke.html"
+  },
+  {
+    "id": "009",
+    "title": "Der Panamakanal",
+    "ort": "Panama",
+    "dauer": "ca. XX Min.",
+    "mp3Url": "https://www.stadtvampir.de/assets/audio/staffel-1/009-der-panamakanal.mp3",
+    "coverUrl": "https://www.stadtvampir.de/assets/cover/staffel-1/009-der-panamakanal.webp",
+    "pageUrl": "https://www.stadtvampir.de/texte/staffel1/009-der-panamakanal.html"
+  },
+  {
+    "id": "015",
+    "title": "Das Archiv der Lebenswege",
+    "ort": "",
+    "dauer": "ca. XX Min.",
+    "mp3Url": "https://www.stadtvampir.de/assets/audio/staffel-1/015-das-archiv-der-lebenswege.mp3",
+    "coverUrl": "https://www.stadtvampir.de/assets/cover/staffel-1/015-das-archiv-der-lebenswege.webp",
+    "pageUrl": "https://www.stadtvampir.de/texte/staffel1/015-das-archiv-der-lebenswege.html"
+  },
+  {
+    "id": "018",
+    "title": "Die letzte Wende",
+    "ort": "",
+    "dauer": "ca. XX Min.",
+    "mp3Url": "https://www.stadtvampir.de/assets/audio/staffel-1/018-die-letzte-wende.mp3",
+    "coverUrl": "https://www.stadtvampir.de/assets/cover/staffel-1/018-die-letzte-wende.webp",
+    "pageUrl": "https://www.stadtvampir.de/texte/staffel1/018-die-letzte-wende.html"
+  },
+  {
+    "id": "020",
+    "title": "Fernsehturm grüßt die Sonne",
+    "ort": "Hamburg",
+    "dauer": "ca. XX Min.",
+    "mp3Url": "https://www.stadtvampir.de/assets/audio/staffel-1/020-fehrnsehturm-gruesst-die-sonne.mp3",
+    "coverUrl": "https://www.stadtvampir.de/assets/cover/staffel-1/020-fehrnsehturm-gruesst-die-sonne.webp",
+    "pageUrl": "https://www.stadtvampir.de/texte/staffel1/020-fernsehturm-gruesst-die-sonne.html"
+  },
+  {
+    "id": "021",
+    "title": "Die stille Schicht",
+    "ort": "",
+    "dauer": "ca. XX Min.",
+    "mp3Url": "https://www.stadtvampir.de/assets/audio/staffel-1/021-die-stille-schicht.mp3",
+    "coverUrl": "https://www.stadtvampir.de/assets/cover/staffel-1/021-die-stille-schicht.webp",
+    "pageUrl": "https://www.stadtvampir.de/texte/staffel1/021-die-stille-schicht.html"
+  },
+  {
+    "id": "029",
+    "title": "Pawnshop des Einzigartigen",
+    "ort": "",
+    "dauer": "ca. XX Min.",
+    "mp3Url": "https://www.stadtvampir.de/assets/audio/staffel-2/029-pawnshop-des-einzigartigen.mp3",
+    "coverUrl": "https://www.stadtvampir.de/assets/cover/staffel-2/029-pawnshop-des-einzigartigen.webp",
+    "pageUrl": "https://www.stadtvampir.de/texte/staffel2/029-pawnshop-des-einzigartigen.html"
+  },
+  {
+    "id": "030",
+    "title": "Das Amulett des Schweigens",
+    "ort": "",
+    "dauer": "ca. XX Min.",
+    "mp3Url": "https://www.stadtvampir.de/assets/audio/staffel-2/030-das-amulett-des-schweigens.mp3",
+    "coverUrl": "https://www.stadtvampir.de/assets/cover/staffel-2/030-das-amulett-des-schweigens.webp",
+    "pageUrl": "https://www.stadtvampir.de/texte/staffel2/030-das-amulett-des-schweigens.html"
+  },
+  {
+    "id": "031",
+    "title": "404: Sleep Not Found",
+    "ort": "",
+    "dauer": "ca. XX Min.",
+    "mp3Url": "https://www.stadtvampir.de/assets/audio/staffel-2/031-404-sleep-not-found.mp3",
+    "coverUrl": "https://www.stadtvampir.de/assets/cover/staffel-2/031-404-sleep-not-found.webp",
+    "pageUrl": "https://www.stadtvampir.de/texte/staffel2/031-404-sleep-not-found.html"
+  },
+  {
+    "id": "032",
+    "title": "So oder So",
+    "ort": "",
+    "dauer": "ca. XX Min.",
+    "mp3Url": "https://www.stadtvampir.de/assets/audio/staffel-2/032-so-oder-so.mp3",
+    "coverUrl": "https://www.stadtvampir.de/assets/cover/staffel-2/032-so-oder-so.webp",
+    "pageUrl": "https://www.stadtvampir.de/texte/staffel2/032-so-oder-so.html"
+  },
+  {
+    "id": "033",
+    "title": "Utrecht Boom Bap",
+    "ort": "Utrecht",
+    "dauer": "ca. XX Min.",
+    "mp3Url": "https://www.stadtvampir.de/assets/audio/staffel-2/033-utrecht-boom-bap.mp3",
+    "coverUrl": "https://www.stadtvampir.de/assets/cover/staffel-2/033-utrecht-boom-bap.webp",
+    "pageUrl": "https://www.stadtvampir.de/texte/staffel2/033-utrecht-boom-bap.html"
+  },
+  {
+    "id": "047",
+    "title": "Der unsichtbare See",
+    "ort": "",
+    "dauer": "ca. XX Min.",
+    "mp3Url": "https://www.stadtvampir.de/assets/audio/staffel-2/047-der-unsichtbare-see.mp3",
+    "coverUrl": "https://www.stadtvampir.de/assets/cover/staffel-2/047-der-unsichtbare-see.webp",
+    "pageUrl": "https://www.stadtvampir.de/texte/staffel2/047-der-unsichtbare-see.html"
+  }
+]
